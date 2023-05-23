@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <style>
+      .box {
+        padding: 12px;
+        border: 1px solid gray;
+      }
+      .text-normal {
+        font-size: 20px;
+      }
+      .parent {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: 200px 1fr;
+      }
+      .first {
+        background: lightcyan;
+        height: 300px;
+      }
+      .btn {
+        background-color: green;
+        color: white;
+        border-radius: 4px;
+        text-align: center;
+        border: 1px solid green;
+        margin-top: 14px;
+        padding: 4px 14px;
+        font-size: 16px;
+        font-weight: bold;
+    
+        width: 100%;
+      }
+      .one {
+        background: gainsboro;
+        height: 50px;
+        margin: 14px 0px;
+      }
+      .two {
+        background: gainsboro;
+        height: 150px;
+      }
+      .box-parent {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box-parent">
+      <div class="box">
+        <div>
+          <p class="text-normal">Topnav, content and footer:</p>
+        </div>
+        <div class="one">First</div>
+        <div class="two">Second</div>
+        <div class="one">Third</div>
+        <button class="btn">Try it Yourself</button>
+      </div>
+      <div class="box">
+        <div>
+          <p class="text-normal">Sidenav and content:</p>
+        </div>
+        <div class="parent">
+          <div class="first">First</div>
+          <div class="first">Second</div>
+        </div>
+        <div>
+          <button class="btn">Try it Yourself</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

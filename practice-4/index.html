@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<hr lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPTC</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<img src="dz_logo_2021_cropped.webp" alt="logo" width="200"><span>Java Zone</span>
+
+<p class="b">
+    REFCARDZ TREND REPORTS WEBINARS |
+    Agile AI Big Data Cloud Database DevOps Integration IoT Java Microservices Open Source Performance Security Web Dev
+</p>
+</hr>
+<p>
+    DZone > Java Zone > Refactoring Java Application: Object-Oriented And Functional Approaches
+
+</p>
+<h1>
+    Refactoring Java Application: Object-
+    <h1>
+        And Functional Approaches
+    </h1>
+</h1>
+<p>
+    Learn how you can achieve better design using object-
+    oriented and functional approaches.
+<p>
+    This post includes
+    examples with inheritance and functional interfaces.
+</p>
+</p>
+<img src="thumbnail.jpeg" alt="thumbnail" width="40"> <span>by Dmitry Egorov CORE · May. 11, 22 · Java Zone ·
+    Tutorial</span>
+<h2>
+    Java Refactoring Approaches
+</h2>
+<p>
+    Refactoring in Java has many aspects, but among all of them, there are two fundamentals:
+    object-oriented and
+<p>
+    functional. Object-oriented existed almost from the first Java version, whereas functional
+    appeared only with
+</p>
+
+<p>
+    Java 1.8 (March 2014).
+</p>
+</p>
+<h2>
+
+    Object-Oriented (OO) and Functional Approaches
+</h2>
+<p>
+    Java is a classical object-oriented language and allows the creation of flexible object structures. After Java
+    1.8
+<p>received functional features, it became capable to operate not only with objects or methods but with lambdas
+
+<p>
+    (which is executable code itself). In the functional world, you can operate with functions as with objects in
+    the
+</p>
+OO world.
+</p>
+</p>
+<img src="1651348275812.png" alt="image1">
+<h2>
+    Refactoring Code Using OO Approach
+</h2>
+<p>
+    Playing with interfaces and classes using inheritance or composition, you can create reusable generic solutions
+<P>
+    that can reduce the code amount and increase readability. Classes can be united in the same common structure
+</P>
+<p>
+    if
+    they:
+</p>
+</p>
+<ul>
+    <li>
+
+        Have similar fields and recognized as the same entity
+    </li>
+
+</ul>
+<ul>
+    <li>
+
+        Have relations parent/children
+
+    </li>
+</ul>
+
+<ul>
+    <li>
+        Have similar purpose methods
+
+    </li>
+</ul>
+<h2>
+    Refactoring Code Using Functional Approach
+</h2>
+<p>
+    Unlike the OO approach, this one extracts the code that has the same behavior. For example, we can recognize
+<p>
+    similarities in the next examples:
+</p>
+</p>
+<ul>
+    <li>
+        Implementation has the same return type
+    </li>
+</ul>
+<ul>
+    <li>
+        Implementation has the same functionality
+    </li>
+</ul>
+<h1>
+    Refactoring Example Using Both Approaches
+</h1>
+<p>
+    Let's assume we have a small application that makes payments to permanent and contract employees.
+<P>
+    fter each
+    payment, we print a report about Employee and show the in data different formats (JSON and XML for
+</P>
+<P>
+    A permanent and
+    contractor).
+</P>
+</p>
+<img src="1651502570803.png" alt="image2" width="800">
+<p>
+    Now let's take a look at the default structure:
+</p>
+<img src="1651521066111.png" alt="image3" width="800">
+<h2>
+    Refactoring Classes Structure
+</h2>
+<p>
+    It is pretty visible that Contractor can be a child of Employee class. makePayment can be overridden
+<P>
+    (also we might
+    create a Payable interface and extract makePayment method, but let's keep it simple). So after
+</P>
+<P>
+    refactoring, we might
+    have some fields in common together with reused constructors.
+</P>
+</p>
+<img src="1651505037201.png" alt="image4" width="800">
+<h2>
+    Refactoring Functional Aspects
+</h2>
+<p>
+    Now we can review and find similarities from a functional perspective:
+</p>
+<img src="1651511097905.png" alt="image5" width="800">
+<p>
+    As you can see from the printing report, we process it in the same way: we pass an object and return a string.
+<P>
+    So we
+    can extract that code as a reusable function and use it dynamically for this business logic or even
+</P>
+<P>
+    outside of it.
+</P>
+</p>
+<h2>
+    Creating Function Interface
+</h2>
+<p>
+    In order to decide the right functional interface (e.g., Predicate, Consumer, Function, etc.), we need to check our
+<P>
+    inputs and outputs. In our case, we get an Object and convert it to a String.
+
+</P>
+
+</p>
+<img src="1651518443739.png" alt="image6" width="800">
+<p>
+    Such an interface is provided by function, but in order to make it more clear, we create our own Converter
+<P>
+    interface
+    with method serialize. In that case, it would be easily readable:
+</P>
+</p>
+<img src="1651518567812.png" alt="image7" width="300">
+<h2>
+    Creating Lambdas: Converter Functional Interface
+</h2>
+<p>
+    Now having a functional interface we create two Converters: json and xml. Both of them will match the
+<P>
+    defined
+    signature (object input and string output).
+</P>
+</p>
+<img src="1651701799850.png" alt="image8" width="800">
+<P>
+    Now let's use them in our code:
+</P>
+<img src="1651521656192.png" alt="image9" width="800">
+<h2>
+    Encapsulating Converters Inside Employee Class
+</h2>
+<p>
+    As in the last step, we can encapsulate this function right inside the parent Employer class and use them inside
+<P>
+    the
+    internal function:
+</P>
+</p>
+<img src="1651522100677.png" alt="image10" width="800">
+<h1>
+    Reviewing the Final Version
+</h1>
+<p>
+    As in the last step, we initialize both employers and iterate through them executing payment and printing methods.
+</p>
+<img src="1651524712131.png" alt="image11" width="700">
+<p>
+    So what do we have at the end?
+</p>
+<ul>
+    <li>
+        Commons fields and methods from parent Employer class are now reused in Contractor
+    </li>
+</ul>
+<ul>
+    <li>
+        Extracted functions converters can be replenished in the future without changing the Employer class
+    </li>
+</ul>
+<ul>
+    <li>
+        Extracted functions can be reused outside of the Employer class
+    </li>
+</ul>
+<h1>
+    Criticism
+</h1>
+<img src="1651527838817.png" alt="imgae12" width="500">
+<p>
+    The shown example is not perfect and can be improved. For example, we can hide the Employee/Contractors
+<P>
+    class behind
+    the interface, and it's good practice! I tried to write a simple example and decided to show just
+</P>
+<P>
+    some OO and
+    Functional features.
+</P>
+</p>
+
+<p>
+    The functions I've created are not pure functions and some developers insist it's much better to have only pure
+<P>
+    functions in Java. It's a big discussion outside of this article.
+</P>
+</p>
+<h2>
+    My Personal Criticism About Functions
+</h2>
+<p>
+    One of the purposes of this article was to make readers more confident with a functional approach;
+<P>
+    but at the same
+    time, I'm a person who prefers methods or static methods over functions. Why? Because the old method
+</P>
+<P>
+    approach allows
+    you to read code line by line from top to bottom and you can easily see the logic. With a
+</P>
+<P>
+    functional approach, you
+    have to return back (or memorize) the function content when the function is called.
+</P>
+<P>
+    So, as I think about extracting
+    the same functionality code into methods/static methods - personally, I think it
+</P>
+<P>
+    might be better.
+</P>
+</p>
+<h2>
+    Final Message
+</h2>
+<img src="1651526848425.png" alt="image13" width="700">
+<p>
+    The main message of this article is:
+</p>
+<ul>
+    <li>
+        Use the object-oriented approach in order to unite similar-by-nature objects in one structure
+    </li>
+</ul>
+<ul>
+    <li>
+        Use a functional approach to unite similar-by-functionality code. Together they make code significantly more
+        readable and maintainable. The code used in this article is available here.
+    </li>
+</ul>
+
+
+</html>
